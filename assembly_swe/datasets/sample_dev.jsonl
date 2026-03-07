@@ -1,0 +1,5 @@
+{"task_id":"asm_hello_001","tier":1,"instruction":"Write a NASM x86-64 Linux program that prints exactly 'Hello\\n' and exits with code 0.","expected_stdout":"Hello\n","expected_exit_code":0,"tags":["io","print"]}
+{"task_id":"asm_number_002","tier":1,"instruction":"Write a NASM x86-64 Linux program that prints exactly '42\\n' and exits with code 0.","expected_stdout":"42\n","expected_exit_code":0,"tags":["io","constant"]}
+{"task_id":"asm_empty_003","tier":2,"instruction":"Write a NASM x86-64 Linux program that prints nothing and exits with code 0.","expected_stdout":"","expected_exit_code":0,"tags":["exit"]}
+{"task_id":"asm_two_lines_004","tier":2,"instruction":"Write a NASM x86-64 Linux program that prints exactly 'A\\nB\\n' and exits with code 0.","expected_stdout":"A\nB\n","expected_exit_code":0,"tags":["io","multiline"]}
+{"task_id":"asm_exit7_005","tier":3,"instruction":"Write a NASM x86-64 Linux program that prints nothing and exits with code 7.","expected_exit_code":7,"tags":["exit_code"]}

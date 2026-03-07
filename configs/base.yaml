@@ -1,0 +1,36 @@
+﻿project:
+  name: codeforgefinal
+  seed: 42
+
+model:
+  base_model: Qwen/Qwen3.5-2B
+  adapter_path: ""
+  load_in_4bit: true
+  trust_remote_code: true
+  torch_dtype: float16
+
+sampling:
+  max_new_tokens: 192
+  temperature: 0.60
+  top_p: 0.95
+  top_k: 20
+  min_p:
+  repetition_penalty: 1.03
+  num_candidates: 4
+  repair_steps: 1
+
+reward:
+  assemble: 0.10
+  link: 0.05
+  run: 0.05
+  public_test: 0.10
+  hidden_test: 0.60
+  cleanliness: 0.10
+  prose_penalty: -0.05
+  bad_abi_penalty: -0.05
+  regress_penalty: -0.10
+
+runtime:
+  verifier_timeout_sec: 6
+  artifacts_dir: artifacts
+  max_episode_steps: 3

@@ -1,0 +1,902 @@
+[
+  {
+    "id": "t1_exit_0",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 0.",
+    "expected_exit_code": 0,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t1_exit_1",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 1.",
+    "expected_exit_code": 1,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 1\n    syscall"
+  },
+  {
+    "id": "t1_exit_2",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 2.",
+    "expected_exit_code": 2,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 2\n    syscall"
+  },
+  {
+    "id": "t1_exit_3",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 3.",
+    "expected_exit_code": 3,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 3\n    syscall"
+  },
+  {
+    "id": "t1_exit_4",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 4.",
+    "expected_exit_code": 4,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 4\n    syscall"
+  },
+  {
+    "id": "t1_exit_5",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 5.",
+    "expected_exit_code": 5,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 5\n    syscall"
+  },
+  {
+    "id": "t1_exit_6",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 6.",
+    "expected_exit_code": 6,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 6\n    syscall"
+  },
+  {
+    "id": "t1_exit_7",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 7.",
+    "expected_exit_code": 7,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 7\n    syscall"
+  },
+  {
+    "id": "t1_exit_8",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 8.",
+    "expected_exit_code": 8,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 8\n    syscall"
+  },
+  {
+    "id": "t1_exit_9",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 9.",
+    "expected_exit_code": 9,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 9\n    syscall"
+  },
+  {
+    "id": "t1_exit_10",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 10.",
+    "expected_exit_code": 10,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 10\n    syscall"
+  },
+  {
+    "id": "t1_exit_13",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 13.",
+    "expected_exit_code": 13,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 13\n    syscall"
+  },
+  {
+    "id": "t1_exit_20",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 20.",
+    "expected_exit_code": 20,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 20\n    syscall"
+  },
+  {
+    "id": "t1_exit_42",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 42.",
+    "expected_exit_code": 42,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 42\n    syscall"
+  },
+  {
+    "id": "t1_exit_50",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 50.",
+    "expected_exit_code": 50,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 50\n    syscall"
+  },
+  {
+    "id": "t1_exit_64",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 64.",
+    "expected_exit_code": 64,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 64\n    syscall"
+  },
+  {
+    "id": "t1_exit_99",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 99.",
+    "expected_exit_code": 99,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 99\n    syscall"
+  },
+  {
+    "id": "t1_exit_100",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 100.",
+    "expected_exit_code": 100,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 100\n    syscall"
+  },
+  {
+    "id": "t1_exit_127",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 127.",
+    "expected_exit_code": 127,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 127\n    syscall"
+  },
+  {
+    "id": "t1_exit_200",
+    "tier": 1,
+    "instruction": "Write a NASM x86-64 Linux program that exits with code 200.",
+    "expected_exit_code": 200,
+    "expected_stdout": null,
+    "hint_lines": 6,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 60\n    mov rdi, 200\n    syscall"
+  },
+  {
+    "id": "t2_hello_world",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"Hello, World!\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "Hello, World!\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'Hello, World!', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_ok",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"OK\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "OK\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'OK', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_nasm",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"NASM\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "NASM\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'NASM', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_42",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"42\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "42\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db '42', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_done",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"done\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "done\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'done', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_pass",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"pass\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "pass\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'pass', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_codeforge",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"CodeForge\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "CodeForge\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'CodeForge', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_assembly",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"assembly\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "assembly\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'assembly', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_linux",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"Linux\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "Linux\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'Linux', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_x8664",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"x86-64\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "x86-64\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'x86-64', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_ministral",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"Ministral\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "Ministral\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'Ministral', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_hackathon",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"hackathon\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "hackathon\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'hackathon', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_grpo",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"GRPO\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "GRPO\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'GRPO', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_training",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"training\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "training\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'training', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_reward",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"reward\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "reward\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'reward', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_success",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"success\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "success\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'success', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_hello",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"hello\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "hello\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'hello', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_world",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"world\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "world\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'world', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_test",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"test\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "test\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'test', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_output",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"output\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "output\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'output', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_compute",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"compute\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "compute\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'compute', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_kernel",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"kernel\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "kernel\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'kernel', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_syscall",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"syscall\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "syscall\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'syscall', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_register",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"register\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "register\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'register', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_stack",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"stack\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "stack\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'stack', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_memory",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"memory\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "memory\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'memory', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_binary",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"binary\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "binary\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'binary', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_compile",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"compile\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "compile\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'compile', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_silicon",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"silicon\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "silicon\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'silicon', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t2_pipeline",
+    "tier": 2,
+    "instruction": "Write a NASM x86-64 Linux program that prints \"pipeline\" followed by a newline to stdout.",
+    "expected_exit_code": null,
+    "expected_stdout": "pipeline\n",
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .data\n    msg db 'pipeline', 10\n    len equ $ - msg\nsection .text\n_start:\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n    mov rax, 60\n    xor rdi, rdi\n    syscall"
+  },
+  {
+    "id": "t3_mul_7_8",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 7 * 8 and exits with the result (56) as the exit code.",
+    "expected_exit_code": 56,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 7\n    imul rax, rax, 8\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_add_20_22",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 20 + 22 and exits with the result (42) as the exit code.",
+    "expected_exit_code": 42,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 20\n    add rax, 22\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_sub_100_13",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 100 - 13 and exits with the result (87) as the exit code.",
+    "expected_exit_code": 87,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 100\n    sub rax, 13\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_6_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 6 * 7 and exits with the result (42) as the exit code.",
+    "expected_exit_code": 42,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 6\n    imul rax, rax, 7\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_div_50_2",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 50 / 2 using the div instruction (clear rdx first) and exits with the result (25) as the exit code.",
+    "expected_exit_code": 25,
+    "expected_stdout": null,
+    "hint_lines": 9,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 50\n    xor rdx, rdx\n    mov rbx, 2\n    div rbx\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_max_30_17",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes max(30, 17) using cmp and cmovl and exits with the result (30) as the exit code.",
+    "expected_exit_code": 30,
+    "expected_stdout": null,
+    "hint_lines": 10,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 30\n    mov rbx, 17\n    cmp rax, rbx\n    cmovl rax, rbx\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_add_chain",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 10 + 20 - 5 and exits with the result (25) as the exit code.",
+    "expected_exit_code": 25,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 10\n    add rax, 20\n    sub rax, 5\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_3_9",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 3 * 9 and exits with the result (27) as the exit code.",
+    "expected_exit_code": 27,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 3\n    imul rax, rax, 9\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_sub_15_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 15 - 7 and exits with the result (8) as the exit code.",
+    "expected_exit_code": 8,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 15\n    sub rax, 7\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_4_4",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 4 * 4 and exits with the result (16) as the exit code.",
+    "expected_exit_code": 16,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 4\n    imul rax, rax, 4\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_8_8",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 8 * 8 and exits with the result (64) as the exit code.",
+    "expected_exit_code": 64,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 8\n    imul rax, rax, 8\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_div_100_4",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 100 / 4 using the div instruction (xor rdx, rdx before dividing) and exits with the result (25) as the exit code.",
+    "expected_exit_code": 25,
+    "expected_stdout": null,
+    "hint_lines": 9,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 100\n    xor rdx, rdx\n    mov rbx, 4\n    div rbx\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mod_100_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 100 mod 7 using the div instruction (remainder is in rdx) and exits with the result (2) as the exit code.",
+    "expected_exit_code": 2,
+    "expected_stdout": null,
+    "hint_lines": 9,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 100\n    xor rdx, rdx\n    mov rbx, 7\n    div rbx\n    mov rdi, rdx\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_min_17_30",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes min(17, 30) using cmp and cmovg and exits with the result (17) as the exit code.",
+    "expected_exit_code": 17,
+    "expected_stdout": null,
+    "hint_lines": 10,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 17\n    mov rbx, 30\n    cmp rax, rbx\n    cmovg rax, rbx\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_shl_2_5",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 2 << 5 (left shift 2 by 5 bits) and exits with the result (64) as the exit code.",
+    "expected_exit_code": 64,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 2\n    shl rax, 5\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_shr_128_2",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 128 >> 2 (logical right shift 128 by 2 bits) and exits with the result (32) as the exit code.",
+    "expected_exit_code": 32,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 128\n    shr rax, 2\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_and_ff_0f",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 0xFF AND 0x0F using the and instruction and exits with the result (15) as the exit code.",
+    "expected_exit_code": 15,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 0xFF\n    and rax, 0x0F\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_or_0f_30",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 0x0F OR 0x30 using the or instruction and exits with the result (63) as the exit code.",
+    "expected_exit_code": 63,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 0x0F\n    or rax, 0x30\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_xor_ff_aa",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 0xFF XOR 0xAA using the xor instruction and exits with the result (85) as the exit code.",
+    "expected_exit_code": 85,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 0xFF\n    xor rax, 0xAA\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_5_5",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 5 * 5 and exits with the result (25) as the exit code.",
+    "expected_exit_code": 25,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 5\n    imul rax, rax, 5\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_add_40_2",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 40 + 2 and exits with the result (42) as the exit code.",
+    "expected_exit_code": 42,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 40\n    add rax, 2\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_10_10",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 10 * 10 and exits with the result (100) as the exit code.",
+    "expected_exit_code": 100,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 10\n    imul rax, rax, 10\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mod_50_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 50 mod 7 using the div instruction (remainder in rdx) and exits with the result (1) as the exit code.",
+    "expected_exit_code": 1,
+    "expected_stdout": null,
+    "hint_lines": 9,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 50\n    xor rdx, rdx\n    mov rbx, 7\n    div rbx\n    mov rdi, rdx\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_shl_1_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 1 << 7 (left shift 1 by 7 bits) and exits with the result (128) as the exit code.",
+    "expected_exit_code": 128,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    shl rax, 7\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_7_7",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 7 * 7 and exits with the result (49) as the exit code.",
+    "expected_exit_code": 49,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 7\n    imul rax, rax, 7\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_add_30_30",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 30 + 30 and exits with the result (60) as the exit code.",
+    "expected_exit_code": 60,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 30\n    add rax, 30\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_sub_200_100",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 200 - 100 and exits with the result (100) as the exit code.",
+    "expected_exit_code": 100,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 200\n    sub rax, 100\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_mul_3_3",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 3 * 3 and exits with the result (9) as the exit code.",
+    "expected_exit_code": 9,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 3\n    imul rax, rax, 3\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_add_3_4_5",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes 3 + 4 + 5 and exits with the result (12) as the exit code.",
+    "expected_exit_code": 12,
+    "expected_stdout": null,
+    "hint_lines": 9,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 3\n    add rax, 4\n    add rax, 5\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t3_neg_abs",
+    "tier": 3,
+    "instruction": "Write a NASM x86-64 Linux program that computes the absolute value of -37 using the neg instruction and exits with the result (37) as the exit code.",
+    "expected_exit_code": 37,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, -37\n    neg rax\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_5",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 5 (result: 15) and exits with that sum as the exit code.",
+    "expected_exit_code": 15,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 5\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_10",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 10 (result: 55) and exits with that sum as the exit code.",
+    "expected_exit_code": 55,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 10\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_20",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 20 (result: 210) and exits with that sum as the exit code.",
+    "expected_exit_code": 210,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 20\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_even_10",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of even numbers from 2 to 10 (2+4+6+8+10 = 30) and exits with that sum as the exit code.",
+    "expected_exit_code": 30,
+    "expected_stdout": null,
+    "hint_lines": 13,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 2\n.loop:\n    add rax, rcx\n    add rcx, 2\n    cmp rcx, 10\n    jle .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_loop_x3_7",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to add 3 seven times (result: 21) and exits with that result as the exit code.",
+    "expected_exit_code": 21,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 7\n.loop:\n    add rax, 3\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_fib_10",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes the 10th Fibonacci number (1-indexed: 1,1,2,3,5,8,13,21,34,55) using a loop and exits with the result (55) as the exit code.",
+    "expected_exit_code": 55,
+    "expected_stdout": null,
+    "hint_lines": 16,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    mov rbx, 1\n    mov rcx, 8\n.loop:\n    mov rdx, rax\n    add rax, rbx\n    mov rbx, rdx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_15",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 15 (result: 120) and exits with that sum as the exit code.",
+    "expected_exit_code": 120,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 15\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_factorial_5",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes 5! (5 factorial = 120) using an imul loop and exits with the result (120) as the exit code.",
+    "expected_exit_code": 120,
+    "expected_stdout": null,
+    "hint_lines": 13,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    mov rcx, 5\n.loop:\n    imul rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_power_2_7",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes 2^7 = 128 using the shl instruction and exits with the result (128) as the exit code.",
+    "expected_exit_code": 128,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    shl rax, 7\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_gcd_48_18",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes gcd(48, 18) using the Euclidean algorithm with the div instruction and exits with the result (6) as the exit code.",
+    "expected_exit_code": 6,
+    "expected_stdout": null,
+    "hint_lines": 16,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 48\n    mov rbx, 18\n.gcd:\n    xor rdx, rdx\n    div rbx\n    mov rax, rbx\n    mov rbx, rdx\n    test rbx, rbx\n    jnz .gcd\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_odd_1_9",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of odd numbers from 1 to 9 (1+3+5+7+9 = 25) and exits with that sum as the exit code.",
+    "expected_exit_code": 25,
+    "expected_stdout": null,
+    "hint_lines": 13,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 1\n.loop:\n    add rax, rcx\n    add rcx, 2\n    cmp rcx, 9\n    jle .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_fib_7",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes the 7th Fibonacci number (1-indexed: 1,1,2,3,5,8,13) using a loop and exits with the result (13) as the exit code.",
+    "expected_exit_code": 13,
+    "expected_stdout": null,
+    "hint_lines": 16,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    mov rbx, 1\n    mov rcx, 5\n.loop:\n    mov rdx, rax\n    add rax, rbx\n    mov rbx, rdx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_7",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 7 (result: 28) and exits with that sum as the exit code.",
+    "expected_exit_code": 28,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 7\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_count_div3_20",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that counts how many integers from 1 to 20 are exactly divisible by 3 (result: 6) using a loop with div and exits with the count as the exit code.",
+    "expected_exit_code": 6,
+    "expected_stdout": null,
+    "hint_lines": 18,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rbx, rbx\n    mov rcx, 1\n.loop:\n    cmp rcx, 20\n    jg .done\n    mov rax, rcx\n    xor rdx, rdx\n    mov r8, 3\n    div r8\n    test rdx, rdx\n    jnz .next\n    inc rbx\n.next:\n    inc rcx\n    jmp .loop\n.done:\n    mov rdi, rbx\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_squares_1_4",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes the sum of squares 1^2 + 2^2 + 3^2 + 4^2 (result: 30) using a loop with imul and exits with the result as the exit code.",
+    "expected_exit_code": 30,
+    "expected_stdout": null,
+    "hint_lines": 14,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 1\n.loop:\n    mov rdx, rcx\n    imul rdx, rcx\n    add rax, rdx\n    inc rcx\n    cmp rcx, 4\n    jle .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_power_2_5",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes 2^5 = 32 using the shl instruction and exits with the result (32) as the exit code.",
+    "expected_exit_code": 32,
+    "expected_stdout": null,
+    "hint_lines": 8,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    shl rax, 5\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_loop_add7_x8",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to add 7 eight times (result: 56) and exits with that result as the exit code.",
+    "expected_exit_code": 56,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 8\n.loop:\n    add rax, 7\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_collatz_6",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that counts the number of Collatz steps to reach 1 starting from 6 (sequence: 6,3,10,5,16,8,4,2,1 = 8 steps) and exits with the step count (8) as the exit code.",
+    "expected_exit_code": 8,
+    "expected_stdout": null,
+    "hint_lines": 22,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 6\n    xor rcx, rcx\n.loop:\n    cmp rax, 1\n    je .done\n    inc rcx\n    test rax, 1\n    jz .even\n    imul rax, rax, 3\n    inc rax\n    jmp .loop\n.even:\n    shr rax, 1\n    jmp .loop\n.done:\n    mov rdi, rcx\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_sum_1_9",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that uses a loop to compute the sum of integers from 1 to 9 (result: 45) and exits with that sum as the exit code.",
+    "expected_exit_code": 45,
+    "expected_stdout": null,
+    "hint_lines": 12,
+    "reference_solution": "global _start\nsection .text\n_start:\n    xor rax, rax\n    mov rcx, 9\n.loop:\n    add rax, rcx\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  },
+  {
+    "id": "t4_power_3_3",
+    "tier": 4,
+    "instruction": "Write a NASM x86-64 Linux program that computes 3^3 = 27 using an imul loop (multiply by 3 three times starting from 1) and exits with the result (27) as the exit code.",
+    "expected_exit_code": 27,
+    "expected_stdout": null,
+    "hint_lines": 13,
+    "reference_solution": "global _start\nsection .text\n_start:\n    mov rax, 1\n    mov rcx, 3\n.loop:\n    imul rax, rax, 3\n    dec rcx\n    jnz .loop\n    mov rdi, rax\n    mov rax, 60\n    syscall"
+  }
+]

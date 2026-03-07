@@ -1,0 +1,3 @@
+﻿{"task_id":"asm_exit42_001","tier":1,"instruction":"Write a NASM x86-64 Linux program that exits with code 42.","expected_exit_code":42,"hidden_tests":[{"expected_exit_code":42}]}
+{"task_id":"asm_print_hello_002","tier":1,"instruction":"Write a NASM x86-64 Linux program that prints Hello followed by a newline.","expected_stdout":"Hello\n","hidden_tests":[{"expected_stdout":"Hello\n"}]}
+{"task_id":"asm_print_42_003","tier":2,"instruction":"Write a NASM x86-64 Linux program that prints 42 followed by a newline.","expected_stdout":"42\n","hidden_tests":[{"expected_stdout":"42\n"}]}
