@@ -1,4 +1,4 @@
-﻿project:
+project:
   name: codeforgefinal
   seed: 42
 
@@ -13,10 +13,9 @@ model:
   lora_dropout: 0.05
 
 training:
-  grpo_backend: trl
-  iterations: 180
+  grpo_backend: manual
+  iterations: 24
   prompts_per_iteration: 6
-  use_random_sampling: true
   generations_per_prompt: 4
   learning_rate: 5e-6
   batch_size: 1
@@ -24,14 +23,13 @@ training:
   gradient_checkpointing: true
   grad_clip_norm: 1.0
   train_max_seq_len: 768
-  max_new_tokens: 128
-  temperature: 0.40
-  top_p: 0.75
-  top_k: 16
+  max_new_tokens: 160
+  temperature: 0.50
+  top_p: 0.85
+  top_k: 20
   min_p:
-  repetition_penalty: 1.05
-  kl_beta: 0.06
-  use_mcts_after_iteration: 999
+  repetition_penalty: 1.03
+  kl_beta: 0.05
   use_wandb: true
   push_to_hub: true
   hub_repo_id: PAMF2/codeforgefinal-qwen35-2b
@@ -41,23 +39,25 @@ training:
   use_unsloth: false
 
 reward:
-  stage_weights:
-    assemble: 0.15
-    link: 0.15
-    run: 0.15
-    correctness: 0.55
-  timeout_seconds: 10
+  assemble: 0.10
+  link: 0.05
+  run: 0.05
+  public_test: 0.10
+  hidden_test: 0.60
+  cleanliness: 0.10
+  prose_penalty: -0.05
+  bad_abi_penalty: -0.05
+  regress_penalty: -0.10
 
-mcts:
-  simulations: 8
-  max_lines: 30
-  branch_factor: 2
-  exploration_constant: 1.414
-  max_depth: 8
-  min_tier: 4
+agentic:
+  tasks_path: data/generated/train.jsonl
+  num_candidates: 4
+  repair_steps: 2
+  max_episode_steps: 3
+  repair_gain_weight: 0.10
+  verifier_timeout_sec: 6
+  save_every: 4
 
 paths:
-  prompt_dataset: prompts/dataset.json
   artifacts_dir: artifacts
   checkpoints_dir: checkpoints
-

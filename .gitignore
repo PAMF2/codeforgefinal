@@ -7,12 +7,14 @@ __pycache__/
 .DS_Store
 
 artifacts/
+artifacts_notebook/
 checkpoints/
 runs/
 outputs/
 wandb/
 offload/
 assembly_swe/results/
+data/generated/
 
 .env
 *.log

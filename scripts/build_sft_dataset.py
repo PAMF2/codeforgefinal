@@ -39,7 +39,7 @@ def main() -> None:
             best = rows[0]
             if not bool(best.get("correct")):
                 continue
-            prompt = f"Task: {best['instruction']}"
+            prompt = str(best.get("prompt_text") or f"Task: {best['instruction']}")
             completion = str(best["asm"]).strip() + "\n"
             handle.write(json.dumps({
                 "task_id": task_id,

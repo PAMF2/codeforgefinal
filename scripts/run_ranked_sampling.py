@@ -11,6 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from src.agentic import build_draft_prompt
 from src.data import Task, load_tasks_jsonl
 from src.modeling import generate_completion, load_model_and_tokenizer
 from src.utils import ensure_dir, load_yaml
@@ -21,10 +22,6 @@ SYS_PROMPT = (
     "You are an expert NASM x86-64 Linux programmer. "
     "Output only assembly code, no markdown fences, no explanations."
 )
-
-
-def build_prompt(instruction: str) -> str:
-    return f"{SYS_PROMPT}\n\nTask: {instruction}"
 
 
 def build_repair_prompt(task: Task, previous_asm: str, result: VerifyResult | None) -> str:
@@ -89,11 +86,12 @@ def main() -> None:
     with out_path.open("w", encoding="utf-8") as handle:
         for task in tasks:
             candidates: list[dict[str, Any]] = []
+            initial_prompt = build_draft_prompt(task)
             for cand_idx in range(num_candidates):
                 asm = generate_completion(
                     model=model,
                     tokenizer=tokenizer,
-                    prompt=build_prompt(task.instruction),
+                    prompt=initial_prompt,
                     max_new_tokens=int(sampling_cfg["max_new_tokens"]),
                     temperature=float(sampling_cfg["temperature"]),
                     top_p=float(sampling_cfg["top_p"]),
@@ -131,6 +129,7 @@ def main() -> None:
                 candidates.append({
                     "task_id": task.task_id,
                     "instruction": task.instruction,
+                    "prompt_text": initial_prompt,
                     "candidate_id": f"{task.task_id}-c{cand_idx}",
                     "asm": best_asm,
                     "reward": best_result.reward,

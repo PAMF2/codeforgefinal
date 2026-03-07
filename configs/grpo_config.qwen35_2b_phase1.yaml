@@ -34,8 +34,8 @@ training:
   use_mcts_after_iteration: 999
   use_wandb: true
   push_to_hub: true
-  hub_repo_id: PAMF2/codeforgefinal-qwen35-2bfinal-qwen35-2b
-  hub_fallback_repo_id: PAMF2/codeforgefinal-qwen35-2b-qwen35-2b
+  hub_repo_id: PAMF2/codeforgefinal-qwen35-2b
+  hub_fallback_repo_id: PAMF2/codeforgefinal-qwen35-2b-fallback
   hub_private: true
   dry_run: false
   use_unsloth: false

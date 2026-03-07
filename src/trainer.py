@@ -333,7 +333,7 @@ def run_grpo_update_manual(rows: list[dict[str, Any]], cfg: RuntimeConfig, bundl
         if weight <= 0.0:
             continue
 
-        prompt_text = f"{SYS_PROMPT}\n\nTask: {row['instruction']}\n"
+        prompt_text = str(row.get("prompt_text") or f"{SYS_PROMPT}\n\nTask: {row['instruction']}\n")
         completion = row["asm"].strip() + "\n"
         full_text = prompt_text + completion
 

@@ -21,7 +21,7 @@ def main() -> None:
         "--disable-pip-version-check",
         "--upgrade-strategy",
         "only-if-needed",
-        "trl>=0.23.1",
+        "trl>=0.27.2",
         "peft>=0.18.1",
         "transformers>=5.2.0,<5.3.0",
         "accelerate>=1.11.0",

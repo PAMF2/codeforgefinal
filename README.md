@@ -1,25 +1,20 @@
-﻿# codeforgefinal
+# codeforgefinal
 
-Kaggle-first repo for assembly generation and training with:
+Kaggle-first repo for verifier-driven assembly generation around `Qwen/Qwen3.5-2B`.
 
-- `Qwen3.5-2B`
-- objective verification (`nasm + ld + run`)
-- ranked sampling + repair
-- `assembly_swe` benchmark
-- `GRPO` training pipeline
-- notebook blueprint for compiler-guided repair RL
+Main tracks:
 
-This repo now has two tracks:
+1. `baseline`: sample, verify, rerank, repair, evaluate
+2. `warm-start + GRPO`: old one-shot training path
+3. `agentic repair GRPO`: compiler-guided repair loop with grouped candidates per step
 
-1. fast baseline: generate, verify, rerank, repair, evaluate
-2. full training: warm-start + GRPO + checkpoint benchmark on Kaggle
-
-## Structure
+## Repo layout
 
 ```text
 codeforgefinal/
   assembly_swe/
   configs/
+    agentic_grpo.qwen35_2b.yaml
     base.yaml
     grpo_config.yaml
     grpo_config.qwen35_2b_phase1.yaml
@@ -27,22 +22,25 @@ codeforgefinal/
   data/
   docs/
   notebooks/
+    qwen35_asm_agentic_blueprint.py
   prompts/
   scripts/
     bootstrap_kaggle.py
-    smoke_test.py
+    generate_synthetic_tasks.py
     run_ranked_sampling.py
+    run_agentic_grpo.py
+    kaggle_agentic_qwen35_2b_pipeline.py
     build_sft_dataset.py
     eval.py
+    smoke_test.py
     kaggle_autorun.py
     kaggle_qwen35_2b_pipeline.py
   src/
+    agentic.py
     best_of_n.py
     data.py
     env.py
-    mcts.py
     modeling.py
-    prompt_engine.py
     reward.py
     trainer.py
     utils.py
@@ -50,67 +48,108 @@ codeforgefinal/
   train.py
 ```
 
-## Kaggle Secrets
+## Kaggle secrets
 
-Add these in Kaggle Secrets:
+Add in Kaggle Secrets:
 
 - `HF_TOKEN`
 - `WANDB_API_KEY`
 
-## Quick Baseline
-
-Clone:
+## Bootstrap
 
 ```python
 !git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
 %cd /kaggle/working/codeforgefinal
-```
-
-Bootstrap:
-
-```python
 !python scripts/bootstrap_kaggle.py
 ```
 
-Smoke test:
+## Smoke test
 
 ```python
 !python scripts/smoke_test.py --config configs/base.yaml
 ```
 
-Generate + rerank + repair:
+## Generate synthetic data
+
+This is the first thing to run before longer training.
+
+```python
+!python scripts/generate_synthetic_tasks.py \
+  --out-dir data/generated \
+  --core-size 5000 \
+  --repair-size 2000 \
+  --dev-size 500 \
+  --hard-size 800 \
+  --validate-sample 64
+```
+
+Outputs:
+
+- `data/generated/train.jsonl`
+- `data/generated/dev.jsonl`
+- `data/generated/hard.jsonl`
+- `data/generated/private_eval.jsonl`
+- `data/generated/generation_only.jsonl`
+- `data/generated/repair_only.jsonl`
+- `data/generated/manifest.json`
+
+## Fast baseline
 
 ```python
 !python scripts/run_ranked_sampling.py \
   --config configs/base.yaml \
-  --tasks data/sample_tasks.jsonl \
+  --tasks data/generated/dev.jsonl \
   --out artifacts/predictions.jsonl \
   --num-candidates 4 \
   --repair-steps 1
 ```
 
-Build SFT pairs:
-
 ```python
 !python scripts/build_sft_dataset.py \
-  --tasks data/sample_tasks.jsonl \
+  --tasks data/generated/dev.jsonl \
   --predictions artifacts/predictions.jsonl \
   --out artifacts/sft_pairs.jsonl
 ```
 
-Evaluate:
-
 ```python
 !python scripts/eval.py \
   --config configs/base.yaml \
-  --tasks data/sample_tasks.jsonl \
+  --tasks data/generated/dev.jsonl \
   --predictions artifacts/predictions.jsonl \
   --ks 1,3,5
 ```
 
-## Full Kaggle Training Pipeline
+## Agentic repair GRPO
 
-One command for warm-start + GRPO + benchmark:
+This is the new Kaggle path for compiler-guided repair RL.
+
+One command:
+
+```python
+!python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps --iterations 12
+```
+
+```python
+!python scripts/run_agentic_grpo.py \
+  --config configs/agentic_grpo.qwen35_2b.yaml \
+  --tasks data/generated/train.jsonl \
+  --iterations 12 \
+  --prompts-per-iteration 6 \
+  --num-candidates 4 \
+  --repair-steps 2 \
+  --max-episode-steps 3
+```
+
+Artifacts written under:
+
+- `artifacts/agentic_grpo/metrics.jsonl`
+- `artifacts/agentic_grpo/trajectories/`
+- `artifacts/agentic_grpo/sft/`
+- `checkpoints/agentic_grpo/`
+
+## One-shot warm-start + GRPO pipeline
+
+This preserves the older path from the previous repo.
 
 ```python
 !python scripts/kaggle_qwen35_2b_pipeline.py --bootstrap-deps --phase1-hours 8 --phase2-hours 10
@@ -152,8 +191,6 @@ Manual phase 2:
 
 ## Benchmark
 
-Checkpoint benchmark on `assembly_swe`:
-
 ```python
 !python assembly_swe/tools/eval_all_iters.py \
   --repo-root . \
@@ -176,22 +213,13 @@ Checkpoint benchmark on `assembly_swe`:
   --repair-steps 1
 ```
 
-## Main Files
+## First run on Kaggle
 
-- fast baseline reward/verifier: `src/verifier.py`
-- GRPO reward pipeline: `src/reward.py`
-- trainer: `src/trainer.py`
-- benchmark protocol: `assembly_swe/`
-- Kaggle runner: `scripts/kaggle_qwen35_2b_pipeline.py`
-- notebook blueprint: `notebooks/qwen35_asm_agentic_blueprint.py`
-- research blueprint: `docs/QWEN35_ASM_AGENTIC_RL_BLUEPRINT.md`
-
-## What To Run First
-
-If you want the shortest path to signal on Kaggle:
+If you want the shortest path that actually tests the new stack:
 
 1. `python scripts/bootstrap_kaggle.py`
-2. `python scripts/smoke_test.py --config configs/base.yaml`
-3. `python scripts/kaggle_qwen35_2b_pipeline.py --bootstrap-deps --phase1-hours 2 --phase2-hours 2 --bench-last-iters 3`
+2. `python scripts/generate_synthetic_tasks.py --out-dir data/generated --core-size 1200 --repair-size 400 --dev-size 120 --hard-size 120 --validate-sample 16`
+3. `python scripts/run_ranked_sampling.py --config configs/base.yaml --tasks data/generated/dev.jsonl --out artifacts/predictions.jsonl --num-candidates 4 --repair-steps 1`
+4. `python scripts/run_agentic_grpo.py --config configs/agentic_grpo.qwen35_2b.yaml --tasks data/generated/train.jsonl --iterations 4 --prompts-per-iteration 4`
 
-Then scale up once the small run works.
+Then scale iterations and dataset size once the small run completes.

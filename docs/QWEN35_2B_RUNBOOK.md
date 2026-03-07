@@ -1,68 +1,102 @@
-﻿# Qwen3.5-2B Runbook
+# Qwen3.5-2B Runbook
 
 ## Goal
 
-Use `Qwen/Qwen3.5-2B` as the main actor for CodeForge ASM with:
+Run `Qwen/Qwen3.5-2B` on Kaggle with three layers:
 
-- manual warm-start (`phase1`)
-- moderate GRPO refinement (`phase2`)
-- verifier-first evaluation (`best-of-n + reward + repair`)
+1. synthetic task generation
+2. verifier-first baseline
+3. compiler-guided repair GRPO
 
-This setup is tuned for a Kaggle T4 budget and avoids heavy MCTS.
+The old one-shot warm-start pipeline is still in the repo, but the preferred path is now the agentic repair loop.
 
-## Files
+## Required files
 
-- `configs/grpo_config.qwen35_2b_phase1.yaml`
-- `configs/grpo_config.qwen35_2b_phase2.yaml`
-- `scripts/kaggle_qwen35_2b_pipeline.py`
+- `configs/base.yaml`
+- `configs/agentic_grpo.qwen35_2b.yaml`
+- `scripts/bootstrap_kaggle.py`
+- `scripts/generate_synthetic_tasks.py`
+- `scripts/run_ranked_sampling.py`
+- `scripts/run_agentic_grpo.py`
+- `scripts/kaggle_agentic_qwen35_2b_pipeline.py`
 
-## Kaggle Commands
+## Kaggle bootstrap
 
 ```python
 !git -C /kaggle/working/codeforgefinal pull || git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
-!python /kaggle/working/codeforgefinal/scripts/kaggle_qwen35_2b_pipeline.py --bootstrap-deps --phase1-hours 8 --phase2-hours 10
+%cd /kaggle/working/codeforgefinal
+!python scripts/bootstrap_kaggle.py
 ```
 
-## Manual Training
+## Dataset generation
 
-Phase 1:
-
-```bash
-python scripts/kaggle_autorun.py \
-  --root /kaggle/working/codeforgefinal \
-  --config configs/grpo_config.qwen35_2b_phase1.yaml \
-  --hours 8 \
-  --backend manual \
-  --safe-profile \
-  --batch-size 1 \
-  --generations-per-prompt 6 \
-  --prompts-per-iteration 8 \
-  --gradient-accumulation-steps 6 \
-  --max-new-tokens 128 \
-  --use-mcts-after-iteration 999
+```python
+!python scripts/generate_synthetic_tasks.py \
+  --out-dir data/generated \
+  --core-size 5000 \
+  --repair-size 2000 \
+  --dev-size 500 \
+  --hard-size 800 \
+  --validate-sample 64
 ```
 
-Phase 2:
+## Baseline signal
 
-```bash
-python scripts/kaggle_autorun.py \
-  --root /kaggle/working/codeforgefinal \
-  --config configs/grpo_config.qwen35_2b_phase2.yaml \
-  --hours 10 \
-  --backend trl \
-  --safe-profile \
-  --batch-size 1 \
-  --generations-per-prompt 4 \
+```python
+!python scripts/run_ranked_sampling.py \
+  --config configs/base.yaml \
+  --tasks data/generated/dev.jsonl \
+  --out artifacts/predictions.jsonl \
+  --num-candidates 4 \
+  --repair-steps 1
+```
+
+```python
+!python scripts/eval.py \
+  --config configs/base.yaml \
+  --tasks data/generated/dev.jsonl \
+  --predictions artifacts/predictions.jsonl \
+  --ks 1,3,5
+```
+
+## Agentic GRPO
+
+One command:
+
+```python
+!python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps --iterations 12
+```
+
+```python
+!python scripts/run_agentic_grpo.py \
+  --config configs/agentic_grpo.qwen35_2b.yaml \
+  --tasks data/generated/train.jsonl \
+  --iterations 12 \
   --prompts-per-iteration 6 \
-  --gradient-accumulation-steps 8 \
-  --max-new-tokens 128 \
-  --use-mcts-after-iteration 999
+  --num-candidates 4 \
+  --repair-steps 2 \
+  --max-episode-steps 3
 ```
 
-## Evaluation
+Expected outputs:
 
-```bash
-python assembly_swe/tools/eval_all_iters.py \
+- `artifacts/agentic_grpo/metrics.jsonl`
+- `artifacts/agentic_grpo/trajectories/iter_*.jsonl`
+- `artifacts/agentic_grpo/sft/iter_*.jsonl`
+- `checkpoints/agentic_grpo/iter_*`
+
+## Old one-shot pipeline
+
+Use this only if you want the original warm-start path:
+
+```python
+!python scripts/kaggle_qwen35_2b_pipeline.py --bootstrap-deps --phase1-hours 8 --phase2-hours 10
+```
+
+## Benchmark
+
+```python
+!python assembly_swe/tools/eval_all_iters.py \
   --repo-root . \
   --tasks assembly_swe/datasets/dev_v1_30.jsonl \
   --iter-start 1 \
@@ -83,12 +117,9 @@ python assembly_swe/tools/eval_all_iters.py \
   --repair-steps 1
 ```
 
-## RL Guidance
+## What not to do first
 
-- Use more data and better verifier signals before using more RL.
-- Keep RL moderate on T4:
-  - `manual` warm-start first
-  - `trl` refinement second
-  - no MCTS in the main 30h run
-- If you increase RL pressure too early, you usually improve `assembly_rate` faster than `correct_rate`.
-
+- do not start with `8B`
+- do not start with MCTS
+- do not spend the first Kaggle session on pure token-level RL
+- do not skip dataset generation and expect the repair loop to generalize
