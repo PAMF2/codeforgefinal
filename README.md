@@ -89,6 +89,17 @@ This now defaults to a conservative first run:
 
 If the first agentic pass fails once, the pipeline retries automatically with the same safe regime.
 
+## Colab autoresearch adapter
+
+Inside Colab you can run the helper that loops experiments and keeps the best baseline variant:
+
+```python
+%cd /kaggle/working/codeforgefinal
+python experiments/autoresearch_adapter/colab_runner.py
+```
+
+It generates a tiny dataset per variant, runs `run_ranked_sampling.py` with lightweight candidates, and records results in `experiments/autoresearch_adapter/runs`.
+
 ## Smoke test
 
 ```python

@@ -38,6 +38,17 @@ The old one-shot warm-start pipeline is still in the repo, but the preferred pat
 
 This is the default safe preset for Kaggle now. It uses smaller dataset and rollout sizes, retries the agentic stage once with conservative settings if the first pass fails, and loads `HF_TOKEN` / `WANDB_API_KEY` from `Kaggle Secrets` automatically.
 
+## Colab autoresearch helper
+
+Run this to iterate quick experiments:
+
+```python
+%cd /kaggle/working/codeforgefinal
+python experiments/autoresearch_adapter/colab_runner.py
+```
+
+Each iteration generates a tiny dataset, runs `run_ranked_sampling.py` with lightweight candidates, and stores metrics in `experiments/autoresearch_adapter/runs`.
+
 ## Dataset generation
 
 ```python
