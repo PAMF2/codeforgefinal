@@ -28,6 +28,14 @@ The old one-shot warm-start pipeline is still in the repo, but the preferred pat
 !python scripts/bootstrap_kaggle.py
 ```
 
+## One-command run
+
+```python
+!python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps
+```
+
+This is the default safe preset for Kaggle now. It uses smaller dataset and rollout sizes, and retries the agentic stage once with conservative settings if the first pass fails.
+
 ## Dataset generation
 
 ```python

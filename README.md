@@ -63,6 +63,28 @@ Add in Kaggle Secrets:
 !python scripts/bootstrap_kaggle.py
 ```
 
+## One Command
+
+Safe Kaggle preset:
+
+```python
+!python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps
+```
+
+This now defaults to a conservative first run:
+
+- `core_size=1200`
+- `repair_size=400`
+- `dev_size=120`
+- `hard_size=120`
+- `iterations=2`
+- `prompts_per_iteration=3`
+- `num_candidates=2`
+- `repair_steps=1`
+- `max_episode_steps=2`
+
+If the first agentic pass fails once, the pipeline retries automatically with the same safe regime.
+
 ## Smoke test
 
 ```python
@@ -217,9 +239,7 @@ Manual phase 2:
 
 If you want the shortest path that actually tests the new stack:
 
-1. `python scripts/bootstrap_kaggle.py`
-2. `python scripts/generate_synthetic_tasks.py --out-dir data/generated --core-size 1200 --repair-size 400 --dev-size 120 --hard-size 120 --validate-sample 16`
-3. `python scripts/run_ranked_sampling.py --config configs/base.yaml --tasks data/generated/dev.jsonl --out artifacts/predictions.jsonl --num-candidates 4 --repair-steps 1`
-4. `python scripts/run_agentic_grpo.py --config configs/agentic_grpo.qwen35_2b.yaml --tasks data/generated/train.jsonl --iterations 4 --prompts-per-iteration 4`
+1. `python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps`
+2. if that works, scale up the explicit flags gradually
 
 Then scale iterations and dataset size once the small run completes.
