@@ -30,7 +30,7 @@ def load_kaggle_secrets(prefix: str = "[kaggle_runtime]") -> dict[str, str | boo
         ["HF_TOKEN", "HUGGINGFACE_HUB_TOKEN", "HF_API_TOKEN", "HF_KEY", "hf_token"]
     )
     wandb, wandb_src = load_secret_candidates(
-        ["WANDB_API_KEY", "WANDB_KEY", "WANDB_TOKEN", "wandb_api_key"]
+        ["WANDB_API_KEY", "WANDB _API_KEY", "WANDB_KEY", "WANDB_TOKEN", "wandb_api_key"]
     )
     mistral, mistral_src = load_secret_candidates(
         ["MISTRAL_API_KEY", "MISTRAL_KEY", "MISTRAL_TOKEN", "mistral_api_key"]
