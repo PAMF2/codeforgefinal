@@ -230,7 +230,8 @@ def main() -> int:
             f"iter={iteration} solved_rate={metrics['solved_rate']:.4f} "
             f"avg_final_reward={metrics['avg_final_reward']:.4f} "
             f"repair_gain={metrics['avg_repair_gain']:.4f} "
-            f"grpo_loss={metrics['grpo_loss']:.4f}",
+            f"grpo_loss={metrics['grpo_loss']:.4f} "
+            f"skipped_rows={int(metrics.get('skipped_rows', 0))}",
             flush=True,
         )
 

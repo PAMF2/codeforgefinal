@@ -71,6 +71,8 @@ def generate_completion(
             top_k=top_k if top_k is not None else 50,
             min_p=min_p,
             repetition_penalty=repetition_penalty,
+            remove_invalid_values=True,
+            renormalize_logits=True,
             max_new_tokens=max_new_tokens,
             pad_token_id=tokenizer.pad_token_id,
             eos_token_id=tokenizer.eos_token_id,

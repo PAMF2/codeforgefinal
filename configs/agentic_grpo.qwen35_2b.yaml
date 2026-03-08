@@ -17,16 +17,16 @@ training:
   iterations: 24
   prompts_per_iteration: 6
   generations_per_prompt: 4
-  learning_rate: 5e-6
+  learning_rate: 2e-6
   batch_size: 1
   gradient_accumulation_steps: 8
-  gradient_checkpointing: true
+  gradient_checkpointing: false
   grad_clip_norm: 1.0
   train_max_seq_len: 768
-  max_new_tokens: 160
-  temperature: 0.50
-  top_p: 0.85
-  top_k: 20
+  max_new_tokens: 128
+  temperature: 0.35
+  top_p: 0.75
+  top_k: 12
   min_p:
   repetition_penalty: 1.03
   kl_beta: 0.05

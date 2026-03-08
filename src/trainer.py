@@ -236,6 +236,8 @@ class HFTextGenerator:
                     top_k=top_k if top_k is not None else 50,
                     min_p=min_p,
                     repetition_penalty=repetition_penalty,
+                    remove_invalid_values=True,
+                    renormalize_logits=True,
                     max_new_tokens=max_new_tokens,
                     pad_token_id=self.tokenizer.pad_token_id,
                     eos_token_id=self.tokenizer.eos_token_id,
@@ -309,7 +311,7 @@ def _group_relative_weights(rows: list[dict[str, Any]]) -> list[float]:
 
 def run_grpo_update_manual(rows: list[dict[str, Any]], cfg: RuntimeConfig, bundle: TrainBundle | None) -> dict[str, float]:
     if bundle is None:
-        return {"grpo_loss": 0.0, "kl": 0.0}
+        return {"grpo_loss": 0.0, "kl": 0.0, "skipped_rows": 0.0}
 
     if torch is None or F is None:
         raise RuntimeError("Torch is required for non-dry training mode.")
@@ -326,15 +328,19 @@ def run_grpo_update_manual(rows: list[dict[str, Any]], cfg: RuntimeConfig, bundl
     weights = _group_relative_weights(rows)
     total_loss = 0.0
     used = 0
+    skipped = 0
 
     optimizer.zero_grad(set_to_none=True)
     for i, row in enumerate(rows):
         weight = float(weights[i])
-        if weight <= 0.0:
+        if weight <= 0.0 or not math.isfinite(weight):
             continue
 
         prompt_text = str(row.get("prompt_text") or f"{SYS_PROMPT}\n\nTask: {row['instruction']}\n")
         completion = row["asm"].strip() + "\n"
+        if not completion.strip():
+            skipped += 1
+            continue
         full_text = prompt_text + completion
 
         full_enc = tokenizer(full_text, return_tensors="pt", truncation=True, max_length=max_len)
@@ -345,18 +351,33 @@ def run_grpo_update_manual(rows: list[dict[str, Any]], cfg: RuntimeConfig, bundl
 
         prompt_len = min(prompt_enc["input_ids"].shape[1], labels.shape[1])
         labels[:, :prompt_len] = -100
+        if prompt_len >= labels.shape[1]:
+            skipped += 1
+            continue
 
         out = model(input_ids=input_ids, attention_mask=attention_mask)
         logits = out.logits[:, :-1, :].contiguous()
         target = labels[:, 1:].contiguous()
+        valid_targets = int((target != -100).sum().item())
+        if valid_targets == 0:
+            skipped += 1
+            continue
 
         loss = F.cross_entropy(
-            logits.view(-1, logits.size(-1)),
+            logits.float().view(-1, logits.size(-1)),
             target.view(-1),
             ignore_index=-100,
             reduction="mean",
         )
+        if not torch.isfinite(loss):
+            skipped += 1
+            optimizer.zero_grad(set_to_none=True)
+            continue
         weighted_loss = loss * weight
+        if not torch.isfinite(weighted_loss):
+            skipped += 1
+            optimizer.zero_grad(set_to_none=True)
+            continue
         (weighted_loss / grad_acc).backward()
 
         total_loss += float(weighted_loss.detach().cpu())
@@ -372,8 +393,10 @@ def run_grpo_update_manual(rows: list[dict[str, Any]], cfg: RuntimeConfig, bundl
         optimizer.step()
         optimizer.zero_grad(set_to_none=True)
 
+    model.eval()
+
     avg_loss = total_loss / max(1, used)
-    return {"grpo_loss": avg_loss, "kl": 0.0}
+    return {"grpo_loss": avg_loss, "kl": 0.0, "skipped_rows": float(skipped)}
 
 
 def _extract_completion_text(raw_completion: Any) -> str:
