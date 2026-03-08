@@ -6,6 +6,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from src.kaggle_runtime import load_kaggle_secrets
+
 
 def run(cmd: list[str], cwd: Path) -> None:
     print("[kaggle_agentic_pipeline] $ " + " ".join(cmd), flush=True)
@@ -34,6 +40,8 @@ def main() -> None:
     root = Path(args.root).resolve()
     if not root.exists():
         raise FileNotFoundError(root)
+
+    load_kaggle_secrets(prefix="[kaggle_agentic_pipeline]")
 
     if args.bootstrap_deps:
         run([sys.executable, str(root / "scripts" / "bootstrap_kaggle.py")], cwd=root)

@@ -31,10 +31,12 @@ The old one-shot warm-start pipeline is still in the repo, but the preferred pat
 ## One-command run
 
 ```python
+!git -C /kaggle/working/codeforgefinal pull || git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
+%cd /kaggle/working/codeforgefinal
 !python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps
 ```
 
-This is the default safe preset for Kaggle now. It uses smaller dataset and rollout sizes, and retries the agentic stage once with conservative settings if the first pass fails.
+This is the default safe preset for Kaggle now. It uses smaller dataset and rollout sizes, retries the agentic stage once with conservative settings if the first pass fails, and loads `HF_TOKEN` / `WANDB_API_KEY` from `Kaggle Secrets` automatically.
 
 ## Dataset generation
 

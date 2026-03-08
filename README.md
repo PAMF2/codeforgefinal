@@ -55,10 +55,12 @@ Add in Kaggle Secrets:
 - `HF_TOKEN`
 - `WANDB_API_KEY`
 
+The Kaggle pipeline now loads these automatically at startup.
+
 ## Bootstrap
 
 ```python
-!git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
+!git -C /kaggle/working/codeforgefinal pull || git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
 %cd /kaggle/working/codeforgefinal
 !python scripts/bootstrap_kaggle.py
 ```
@@ -68,6 +70,8 @@ Add in Kaggle Secrets:
 Safe Kaggle preset:
 
 ```python
+!git -C /kaggle/working/codeforgefinal pull || git clone https://github.com/PAMF2/codeforgefinal.git /kaggle/working/codeforgefinal
+%cd /kaggle/working/codeforgefinal
 !python scripts/kaggle_agentic_qwen35_2b_pipeline.py --bootstrap-deps
 ```
 

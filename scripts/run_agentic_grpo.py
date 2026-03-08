@@ -27,6 +27,7 @@ from src.trainer import (
     maybe_push_checkpoint_to_hub,
     run_grpo_update_manual,
 )
+from src.kaggle_runtime import load_kaggle_secrets
 from src.utils import ensure_dir
 from src.verifier import ObjectiveVerifier
 
@@ -108,11 +109,14 @@ def build_sft_rows(episodes: list[EpisodeRecord]) -> list[dict[str, Any]]:
 
 def main() -> int:
     args = parse_args()
+    secrets = load_kaggle_secrets(prefix="[run_agentic_grpo]")
     cfg = load_config(args.config)
     training = cfg.raw.setdefault("training", {})
     paths = cfg.raw.setdefault("paths", {})
     agentic = cfg.raw.setdefault("agentic", {})
     reward_cfg = cfg.raw.get("reward_weights", cfg.raw.get("reward"))
+    training["use_wandb"] = bool(secrets.get("wandb_loaded"))
+    training["push_to_hub"] = bool(secrets.get("hf_loaded"))
 
     if args.iterations is not None:
         training["iterations"] = int(args.iterations)
