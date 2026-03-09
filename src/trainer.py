@@ -759,7 +759,18 @@ def maybe_build_train_bundle(cfg: RuntimeConfig, resume_from: str | None = None)
     if attn_impl != "eager":
         model_load_kwargs["attn_implementation"] = attn_impl
 
-    model = AutoModelForCausalLM.from_pretrained(model_name, **model_load_kwargs)
+    try:
+        model = AutoModelForCausalLM.from_pretrained(model_name, **model_load_kwargs)
+    except ImportError as exc:
+        message = str(exc).lower()
+        if not load_in_4bit or "bitsandbytes" not in message:
+            raise
+        print("[CodeForge] 4-bit load failed; retrying in float16 without bitsandbytes quantization")
+        retry_kwargs = dict(model_load_kwargs)
+        retry_kwargs["quantization_config"] = None
+        if torch is not None:
+            retry_kwargs["torch_dtype"] = torch.float16
+        model = AutoModelForCausalLM.from_pretrained(model_name, **retry_kwargs)
 
     if resume_from:
         from peft import PeftModel
