@@ -398,6 +398,19 @@ def main() -> int:
             f"ok={validation.get('ok')} sample={validation.get('sample_size')} "
             f"failed={validation.get('failed_count')}"
         )
+        if not validation.get("ok", False):
+            failed_examples = validation.get("failed_examples", [])
+            if failed_examples:
+                print(
+                    "[generate_synthetic_tasks] validation failure examples | "
+                    + json.dumps(failed_examples[:3], ensure_ascii=False),
+                    file=sys.stderr,
+                )
+            print(
+                "[generate_synthetic_tasks] validation failed; aborting so downstream training does not run on a broken verifier",
+                file=sys.stderr,
+            )
+            return 1
     return 0
 
 

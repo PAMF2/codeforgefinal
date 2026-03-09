@@ -7,7 +7,7 @@ import random
 import shutil
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -267,7 +267,7 @@ def write_summary(path: Path, payload: dict[str, Any]) -> None:
 def main() -> None:
     args = parse_args()
     rng = random.Random(args.seed)
-    run_tag = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    run_tag = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     root_dir = args.log_dir / run_tag
     root_dir.mkdir(parents=True, exist_ok=True)
     results_tsv = root_dir / "results.tsv"
