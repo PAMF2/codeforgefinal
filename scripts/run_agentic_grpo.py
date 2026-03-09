@@ -13,6 +13,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from src.agentic import (
+    build_draft_prompt,
     EpisodeRecord,
     SamplingConfig,
     flatten_episode_candidates,
@@ -107,6 +108,43 @@ def build_sft_rows(episodes: list[EpisodeRecord]) -> list[dict[str, Any]]:
     return rows
 
 
+def build_reference_bootstrap_rows(tasks: list[Any], verifier: ObjectiveVerifier) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for task in tasks:
+        reference_solution = (task.reference_solution or "").strip()
+        if not reference_solution:
+            continue
+        prompt_text = build_draft_prompt(task)
+        result = verifier.evaluate(
+            task,
+            reference_solution,
+            sample_id=f"{task.task_id}-reference-bootstrap",
+        )
+        rows.append(
+            {
+                "prompt_id": f"{task.task_id}:reference_bootstrap",
+                "prompt_text": prompt_text,
+                "task_id": task.task_id,
+                "instruction": task.instruction,
+                "step_idx": 0,
+                "candidate_idx": -1,
+                "action_type": "reference_bootstrap",
+                "asm": reference_solution,
+                "base_reward": float(result.reward),
+                "reward": float(result.reward),
+                "correct": bool(result.correct),
+                "assembled": bool(result.assembled),
+                "linked": bool(result.linked),
+                "ran": bool(result.ran),
+                "public_pass_rate": float(result.public_pass_rate),
+                "hidden_pass_rate": float(result.hidden_pass_rate),
+                "stage_failed": result.stage_failed,
+                "penalties": list(result.penalties),
+            }
+        )
+    return rows
+
+
 def main() -> int:
     args = parse_args()
     secrets = load_kaggle_secrets(prefix="[run_agentic_grpo]")
@@ -177,6 +215,7 @@ def main() -> int:
     regress_penalty = float(cfg.raw.get("reward", {}).get("regress_penalty", -0.10))
     save_every = int(args.save_every or agentic.get("save_every", 5))
     seed = int(cfg.raw.get("project", {}).get("seed", 42))
+    use_reference_bootstrap = bool(agentic.get("use_reference_bootstrap", True))
     rng = random.Random(seed)
 
     history_path = artifacts_root / "metrics.jsonl"
@@ -206,12 +245,29 @@ def main() -> int:
         train_rows = flatten_episode_rows(episodes, include_all_candidates=True)
         if not train_rows:
             raise RuntimeError("No training rows were produced from the agentic rollouts.")
-        train_metrics = run_grpo_update_manual(train_rows, cfg, bundle)
         episode_metrics = summarize_episodes(episodes)
+        bootstrap_rows = 0
+        if (
+            use_reference_bootstrap
+            and episode_metrics.get("assemble_rate", 0.0) <= 0.0
+            and episode_metrics.get("avg_final_reward", 0.0) <= 0.0
+        ):
+            reference_rows = build_reference_bootstrap_rows(batch_tasks, verifier)
+            if reference_rows:
+                train_rows.extend(reference_rows)
+                bootstrap_rows = len(reference_rows)
+                print(
+                    "[run_agentic_grpo] "
+                    f"iter={iteration} reference_bootstrap_rows={bootstrap_rows}",
+                    flush=True,
+                )
+
+        train_metrics = run_grpo_update_manual(train_rows, cfg, bundle)
         metrics = {
             "iteration": iteration,
             "tasks_in_batch": len(batch_tasks),
             "train_rows": len(train_rows),
+            "bootstrap_rows": bootstrap_rows,
             "num_candidates": num_candidates,
             "repair_steps": repair_steps,
             "max_episode_steps": max_episode_steps,
