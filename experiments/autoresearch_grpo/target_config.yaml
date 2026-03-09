@@ -1,0 +1,63 @@
+project:
+  name: codeforgefinal
+  seed: 42
+
+model:
+  name_or_path: Qwen/Qwen3.5-2B
+  trust_remote_code: true
+  load_in_4bit: true
+  torch_dtype: float16
+  attn_implementation: sdpa
+  lora_r: 32
+  lora_alpha: 64
+  lora_dropout: 0.05
+
+training:
+  grpo_backend: manual
+  iterations: 2
+  prompts_per_iteration: 3
+  generations_per_prompt: 4
+  learning_rate: 2e-6
+  batch_size: 1
+  gradient_accumulation_steps: 8
+  gradient_checkpointing: false
+  grad_clip_norm: 1.0
+  train_max_seq_len: 768
+  max_new_tokens: 128
+  temperature: 0.35
+  top_p: 0.75
+  top_k: 12
+  min_p:
+  repetition_penalty: 1.03
+  kl_beta: 0.05
+  use_wandb: true
+  push_to_hub: true
+  hub_repo_id: PAMF2/codeforgefinal-qwen35-2b
+  hub_fallback_repo_id: PAMF2/codeforgefinal-qwen35-2b-fallback
+  hub_private: true
+  dry_run: false
+  use_unsloth: false
+
+reward:
+  assemble: 0.10
+  link: 0.05
+  run: 0.05
+  public_test: 0.10
+  hidden_test: 0.60
+  cleanliness: 0.10
+  prose_penalty: -0.05
+  bad_abi_penalty: -0.05
+  regress_penalty: -0.10
+
+agentic:
+  tasks_path: data/generated/train.jsonl
+  num_candidates: 2
+  repair_steps: 1
+  max_episode_steps: 2
+  repair_gain_weight: 0.10
+  verifier_timeout_sec: 6
+  save_every: 4
+
+paths:
+  artifacts_dir: artifacts
+  checkpoints_dir: checkpoints

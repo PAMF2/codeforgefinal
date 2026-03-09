@@ -33,6 +33,10 @@ def main() -> None:
     parser.add_argument("--num-candidates", type=int, default=2)
     parser.add_argument("--repair-steps", type=int, default=1)
     parser.add_argument("--max-episode-steps", type=int, default=2)
+    parser.add_argument("--run-autoresearch", action="store_true")
+    parser.add_argument("--autoresearch-experiments", type=int, default=3)
+    parser.add_argument("--autoresearch-time-budget", type=int, default=60)
+    parser.add_argument("--autoresearch-seed", type=int, default=42)
     parser.add_argument("--skip-baseline", action="store_true")
     parser.add_argument("--agentic-retries", type=int, default=1)
     args = parser.parse_args()
@@ -100,34 +104,36 @@ def main() -> None:
             cwd=root,
         )
 
-    agentic_cmd = [
-        sys.executable,
-        str(root / "scripts" / "run_agentic_grpo.py"),
-        "--config",
-        args.agentic_config,
-        "--tasks",
-        "data/generated/train.jsonl",
-        "--iterations",
-        str(args.iterations),
-        "--prompts-per-iteration",
-        str(args.prompts_per_iteration),
-        "--num-candidates",
-        str(args.num_candidates),
-        "--repair-steps",
-        str(args.repair_steps),
-        "--max-episode-steps",
-        str(args.max_episode_steps),
-        "--resume-from",
-        "none",
-    ]
-
-    try:
-        run(agentic_cmd, cwd=root)
-    except subprocess.CalledProcessError:
-        if args.agentic_retries <= 0:
-            raise
-
-        retry_cmd = [
+    if args.run_autoresearch:
+        run(
+            [
+                sys.executable,
+                str(root / "scripts" / "run_autoresearch.py"),
+                "--experiments",
+                str(args.autoresearch_experiments),
+                "--config",
+                args.agentic_config,
+                "--tasks",
+                "data/generated/train.jsonl",
+                "--iterations",
+                str(args.iterations),
+                "--prompts-per-iteration",
+                str(args.prompts_per_iteration),
+                "--num-candidates",
+                str(args.num_candidates),
+                "--repair-steps",
+                str(args.repair_steps),
+                "--max-episode-steps",
+                str(args.max_episode_steps),
+                "--time-budget",
+                str(args.autoresearch_time_budget),
+                "--seed",
+                str(args.autoresearch_seed),
+            ],
+            cwd=root,
+        )
+    else:
+        agentic_cmd = [
             sys.executable,
             str(root / "scripts" / "run_agentic_grpo.py"),
             "--config",
@@ -135,27 +141,54 @@ def main() -> None:
             "--tasks",
             "data/generated/train.jsonl",
             "--iterations",
-            str(max(1, min(args.iterations, 2))),
+            str(args.iterations),
             "--prompts-per-iteration",
-            str(max(2, min(args.prompts_per_iteration, 3))),
+            str(args.prompts_per_iteration),
             "--num-candidates",
-            str(max(1, min(args.num_candidates, 2))),
+            str(args.num_candidates),
             "--repair-steps",
-            str(max(0, min(args.repair_steps, 1))),
+            str(args.repair_steps),
             "--max-episode-steps",
-            str(max(1, min(args.max_episode_steps, 2))),
+            str(args.max_episode_steps),
             "--resume-from",
             "none",
         ]
-        print(
-            "[kaggle_agentic_pipeline] agentic stage failed once; retrying with safer settings",
-            flush=True,
-        )
-        run(retry_cmd, cwd=root)
+
+        try:
+            run(agentic_cmd, cwd=root)
+        except subprocess.CalledProcessError:
+            if args.agentic_retries <= 0:
+                raise
+
+            retry_cmd = [
+                sys.executable,
+                str(root / "scripts" / "run_agentic_grpo.py"),
+                "--config",
+                args.agentic_config,
+                "--tasks",
+                "data/generated/train.jsonl",
+                "--iterations",
+                str(max(1, min(args.iterations, 2))),
+                "--prompts-per-iteration",
+                str(max(2, min(args.prompts_per_iteration, 3))),
+                "--num-candidates",
+                str(max(1, min(args.num_candidates, 2))),
+                "--repair-steps",
+                str(max(0, min(args.repair_steps, 1))),
+                "--max-episode-steps",
+                str(max(1, min(args.max_episode_steps, 2))),
+                "--resume-from",
+                "none",
+            ]
+            print(
+                "[kaggle_agentic_pipeline] agentic stage failed once; retrying with safer settings",
+                flush=True,
+            )
+            run(retry_cmd, cwd=root)
 
     print(
         "[kaggle_agentic_pipeline] done | "
-        "dataset=data/generated train=artifacts/agentic_grpo/metrics.jsonl",
+        "dataset=data/generated",
         flush=True,
     )
 

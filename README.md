@@ -89,16 +89,11 @@ This now defaults to a conservative first run:
 
 If the first agentic pass fails once, the pipeline retries automatically with the same safe regime.
 
-## Colab autoresearch adapter
+## Legacy adapter
 
-Inside Colab you can run the helper that loops experiments and keeps the best baseline variant:
-
-```python
-%cd /kaggle/working/codeforgefinal
-python experiments/autoresearch_adapter/colab_runner.py
-```
-
-It generates a tiny dataset per variant, runs `run_ranked_sampling.py` with lightweight candidates, and records results in `experiments/autoresearch_adapter/runs`.
+`experiments/autoresearch_adapter/` is legacy exploratory material and is not the main GRPO
+autoresearch path. The active path is `scripts/run_autoresearch.py` plus
+`experiments/autoresearch_grpo/target_config.yaml`.
 
 ## Smoke test
 
@@ -183,6 +178,27 @@ Artifacts written under:
 - `artifacts/agentic_grpo/trajectories/`
 - `artifacts/agentic_grpo/sft/`
 - `checkpoints/agentic_grpo/`
+
+### Autoresearch GRPO
+
+Passing `--run-autoresearch` now makes autoresearch the main GRPO stage. Instead of one direct
+`run_agentic_grpo.py` call, the pipeline launches `scripts/run_autoresearch.py`, which:
+
+1. runs a baseline GRPO experiment with the current config
+2. mutates the live GRPO config
+3. re-runs the real GRPO experiment
+4. marks it `keep`, `discard`, or `crash`
+5. advances only if the metrics improved
+
+Outputs are written to `artifacts/autoresearch/grpo/<run_tag>/`, including:
+
+- `results.tsv`
+- `runs.json`
+- `best_config.yaml`
+- `best_artifacts/`
+- per-experiment `run.log`
+
+`--autoresearch-time-budget` is the per-experiment timeout in minutes.
 
 ## One-shot warm-start + GRPO pipeline
 
