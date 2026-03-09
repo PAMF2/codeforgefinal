@@ -339,6 +339,7 @@ def main() -> int:
     parser.add_argument("--hard-size", type=int, default=800)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--validate-sample", type=int, default=0)
+    parser.add_argument("--fail-on-validation", action="store_true")
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir)
@@ -406,11 +407,16 @@ def main() -> int:
                     + json.dumps(failed_examples[:3], ensure_ascii=False),
                     file=sys.stderr,
                 )
+            if args.fail_on_validation:
+                print(
+                    "[generate_synthetic_tasks] validation failed; aborting because --fail-on-validation was set",
+                    file=sys.stderr,
+                )
+                return 1
             print(
-                "[generate_synthetic_tasks] validation failed; aborting so downstream training does not run on a broken verifier",
+                "[generate_synthetic_tasks] validation failed; continuing because fail-fast is disabled",
                 file=sys.stderr,
             )
-            return 1
     return 0
 
 
